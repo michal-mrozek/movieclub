@@ -5,6 +5,7 @@ import uk.co.mm.movieclub.domain.movie.dto.MovieDto;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieService {
@@ -21,5 +22,12 @@ public class MovieService {
     }
     public Optional<MovieDto> findMovieById(Long id){
         return movieRepository.findById(id).map(MovieDtoMapper::map);
+    }
+
+    public List<MovieDto> findMoviesByGenreName(String genre){
+        return movieRepository.findAllByGenre_NameIgnoreCase(genre)
+                .stream()
+                .map(MovieDtoMapper::map)
+                .toList();
     }
 }
