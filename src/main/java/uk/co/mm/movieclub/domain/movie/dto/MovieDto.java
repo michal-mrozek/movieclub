@@ -1,16 +1,7 @@
-package uk.co.mm.movieclub.domain.movie;
+package uk.co.mm.movieclub.domain.movie.dto;
 
+public class MovieDto {
 
-
-import uk.co.mm.movieclub.domain.genre.Genre;
-
-import javax.persistence.*;
-
-@Entity
-public class Movie {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
     private String originalTitle;
@@ -18,13 +9,22 @@ public class Movie {
     private String description;
     private String youtubeTrailerId;
     private Integer releaseYear;
-    @ManyToOne
-    @JoinColumn(name = "genre_id", referencedColumnName = "id")
-    private Genre genre;
+    private String genre;
     private boolean promoted;
 
-    public Long getId() {
-        return id;
+    public MovieDto(Long id, String title, String originalTitle,
+                    String shortDescription, String description,
+                    String youtubeTrailerId, Integer releaseYear,
+                    String genre, boolean promoted) {
+        this.id = id;
+        this.title = title;
+        this.originalTitle = originalTitle;
+        this.shortDescription = shortDescription;
+        this.description = description;
+        this.youtubeTrailerId = youtubeTrailerId;
+        this.releaseYear = releaseYear;
+        this.genre = genre;
+        this.promoted = promoted;
     }
 
     public String getShortDescription() {
@@ -49,6 +49,10 @@ public class Movie {
 
     public void setYoutubeTrailerId(String youtubeTrailerId) {
         this.youtubeTrailerId = youtubeTrailerId;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public void setId(Long id) {
@@ -79,11 +83,11 @@ public class Movie {
         this.releaseYear = releaseYear;
     }
 
-    public Genre getGenre() {
+    public String getGenre() {
         return genre;
     }
 
-    public void setGenre(Genre genre) {
+    public void setGenre(String genre) {
         this.genre = genre;
     }
 
