@@ -4,6 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import uk.co.mm.movieclub.domain.genre.GenreService;
@@ -32,6 +33,12 @@ public class GenreController {
         model.addAttribute("description", genre.getDescription());
         model.addAttribute("movies", movies);
         return "movie-listing";
+    }
+    @GetMapping("gatunki-filmowe")
+    public String findAll(Model model){
+        List<GenreDto> genres = genreService.findAllGenre();
+        model.addAttribute("genres", genres);
+        return "genre-listing";
     }
 
 }
